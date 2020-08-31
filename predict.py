@@ -146,8 +146,8 @@ if __name__ == "__main__":
     for index in range(len(filelist)):
         current_file = filelist[index]
         if opt.kitti2015:
-            leftname = file_path + 'image_2/' + current_file[0: len(current_file) - 1]
-            rightname = file_path + 'image_3/' + current_file[0: len(current_file) - 1]
+            leftname = file_path + 'image_02/data/' + current_file[0: len(current_file) - 1]
+            rightname = file_path + 'image_03/data/' + current_file[0: len(current_file) - 1]
         if opt.kitti:
             leftname = file_path + 'colored_0/' + current_file[0: len(current_file) - 1]
             rightname = file_path + 'colored_1/' + current_file[0: len(current_file) - 1]
