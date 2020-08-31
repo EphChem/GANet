@@ -2,7 +2,7 @@
 python predict.py --crop_height=384 \
                   --crop_width=1248 \
                   --max_disp=192 \
-                  --data_path='/ssd1/zhangfeihu/data/kitti/2015//testing/' \
+                  --data_path='/content/2011_09_26/2011_09_26_drive_0015_sync/' \
                   --test_list='lists/kitti2015_test.list' \
                   --save_path='./result/' \
                   --kitti2015=1 \
