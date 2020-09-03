@@ -178,7 +178,7 @@ if __name__ == "__main__":
             rightname = file_path + 'image_03/data/' + current_file[0: len(current_file) - 1]
             dispname = file_path + 'disparity_gt/' + current_file[0: len(current_file) - 1].split('.')[0] + '.npy'
             disp = np.load(dispname)
-            disp = np.asarray(disp) / 256.0
+            disp = np.asarray(disp) # / 256.0
             savename = opt.save_path + current_file[0: len(current_file) - 1]
         elif opt.kitti:
             leftname = file_path + 'colored_0/' + current_file[0: len(current_file) - 1]
