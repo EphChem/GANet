@@ -174,12 +174,12 @@ if __name__ == "__main__":
     for index in range(len(filelist)):
         current_file = filelist[index]
         if opt.kitti2015:
-            leftname = file_path + 'image_2/' + current_file[0: len(current_file) - 1]
-            rightname = file_path + 'image_3/' + current_file[0: len(current_file) - 1]
-            dispname = file_path + 'disp_occ_0/' + current_file[0: len(current_file) - 1]
-            savename = opt.save_path + current_file[0: len(current_file) - 1]
-            disp = Image.open(dispname)
+            leftname = file_path + 'image_02/data/' + current_file[0: len(current_file) - 1]
+            rightname = file_path + 'image_03/data/' + current_file[0: len(current_file) - 1]
+            dispname = file_path + 'disparity_gt/' + current_file[0: len(current_file) - 1].split('.')[0] + '.npy'
+            disp = np.load(dispname)
             disp = np.asarray(disp) / 256.0
+            savename = opt.save_path + current_file[0: len(current_file) - 1]
         elif opt.kitti:
             leftname = file_path + 'colored_0/' + current_file[0: len(current_file) - 1]
             rightname = file_path + 'colored_1/' + current_file[0: len(current_file) - 1]
