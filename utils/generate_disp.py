@@ -26,18 +26,21 @@ def generate_dispariy_from_velo(pc_velo, height, width, calib):
     return disp_map, depth_map
 
 if __name__ == '__main__':
-    data_path = "/content/2011_09_26/2011_09_26_drive_0015_sync"
-    lidar_dir = data_path + '/velodyne_points/data/'
-    image_dir = data_path + '/image_02/data/'
-    disparity_dir = data_path + '/disparity_gt/'
+    parser = argparse.ArgumentParser(description='Generate Disparity')
+    parser.add_argument('--data_path', type=str, default='/content/2011_09_26/2011_09_26_drive_0015_sync')
+    parser.add_argument('--test_list', type=str, default='/content/GANet/lists/kitti2015_test.list')
+    args = parser.parse_args()
+    
+    lidar_dir = args.data_path + '/velodyne_points/data/'
+    image_dir = args.data_path + '/image_02/data/'
+    disparity_dir = args.data_path + '/disparity_gt/'
     calib_file = "/content/2011_09_26/2011_09_26_drive_0015_calib.txt"
 
 
     if not os.path.isdir(disparity_dir):
         os.makedirs(disparity_dir)
 
-    test_list = "/content/GANet/lists/kitti2015_test.list"
-    with open(test_list, 'r') as f:
+    with open(args.test_list, 'r') as f:
         file_names = [x.strip() for x in f.readlines()]
         print(file_names)
 
@@ -47,19 +50,10 @@ if __name__ == '__main__':
         calib = kitti_util.Calibration(calib_file)
         # load point cloud
         lidar_file_name = predix + '.bin'
-        print(lidar_file_name)
         lidar = np.fromfile(lidar_dir + '/' + lidar_file_name, dtype=np.float32).reshape((-1, 4))[:, :3]
-        print(lidar.shape)
         image_file = '{}/{}.png'.format(image_dir, predix)
         image = cv2.imread(image_file)
         height, width = image.shape[:2]
         disp, depth = generate_dispariy_from_velo(lidar, height, width, calib)
-#         print(disp.shape, depth[288,100])
-#         my_dpi = 120
-#         plt.figure(figsize = (depth.shape[1]/my_dpi, depth.shape[0]/my_dpi), dpi=my_dpi)
-#         cv2.imshow('image', image)
-#         sns.heatmap(depth)
-        # np.save(disparity_dir + '/' + predix, disp)
-        print(disp, disp * 256)
         skimage.io.imsave(disparity_dir + '/' + fn, (disp * 256).astype('uint16'))
-    #     print('Finish Disparity {}'.format(predix))
+        print('Finish Disparity {}'.format(predix))
