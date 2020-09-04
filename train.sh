@@ -31,7 +31,8 @@ CUDA_VISIBLE_DEVICES=0 python train.py --batchSize=8 \
                 --max_disp=192 \
                 --thread=16 \
                 --data_path='/content/2011_09_26/2011_09_26_drive_0015_sync/' \
-                --training_list='/content/GANet/lists/2011_09_26_drive_0015_sync_list.list' \
+                --training_list='/content/GANet/lists/2011_09_26_drive_0015_sync_train.list' \
+                --val_list='/content/GANet/lists/2011_09_26_drive_0015_sync_val.list' \
                 --save_path='./checkpoint/finetune_kitti2015' \
                 --kitti2015=1 \
                 --shift=3 \
