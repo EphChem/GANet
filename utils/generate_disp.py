@@ -1,7 +1,6 @@
 import argparse
 import os
 import numpy as np
-import matplotlib.pyplot as plt
 import cv2
 import kitti_util
 
@@ -54,11 +53,11 @@ if __name__ == '__main__':
         image = cv2.imread(image_file)
         height, width = image.shape[:2]
         disp, depth = generate_dispariy_from_velo(lidar, height, width, calib)
-        print(disp.shape, depth[288,100])
-        my_dpi = 120
-        plt.figure(figsize = (depth.shape[1]/my_dpi, depth.shape[0]/my_dpi), dpi=my_dpi)
-        cv2.imshow('image', image)
-        sns.heatmap(depth)
+#         print(disp.shape, depth[288,100])
+#         my_dpi = 120
+#         plt.figure(figsize = (depth.shape[1]/my_dpi, depth.shape[0]/my_dpi), dpi=my_dpi)
+#         cv2.imshow('image', image)
+#         sns.heatmap(depth)
         # np.save(disparity_dir + '/' + predix, disp)
         print(disp, disp * 256)
         skimage.io.imsave(disparity_dir + '/' + fn, (disp * 256).astype('uint16'))
