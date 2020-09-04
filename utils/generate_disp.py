@@ -42,8 +42,6 @@ if __name__ == '__main__':
 
     with open(args.test_list, 'r') as f:
         file_names = [x.strip() for x in f.readlines()]
-        print(file_names)
-
 
     for fn in file_names:
         predix = fn[:-4]
