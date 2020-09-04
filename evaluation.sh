@@ -2,7 +2,7 @@ CUDA_VISIBLE_DEVICES=0 python evaluation.py --crop_height=384 \
                   --crop_width=1248 \
                   --max_disp=192 \
                   --data_path='/content/2011_09_26/2011_09_26_drive_0015_sync/' \
-                  --test_list='lists/kitti2015_test.list' \
+                  --test_list='lists/2011_09_26_drive_0015_sync_list.list' \
                   --save_path='./result/' \
                   --resume='./checkpoint/kitti2015_final.pth' \
                   --threshold=3.0 \
