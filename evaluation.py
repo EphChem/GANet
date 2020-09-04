@@ -179,7 +179,6 @@ if __name__ == "__main__":
             rightname = file_path + 'image_03/data/' + current_file[0: len(current_file) - 1]
             dispname = file_path + 'disparity_gt/' + current_file[0: len(current_file) - 1]
             disp = Image.open(dispname)
-            print("disp", np.asarray(disp))
             disp = np.asarray(disp) / 256.0
             savename = opt.save_path + current_file[0: len(current_file) - 1]
         elif opt.kitti:
@@ -200,10 +199,7 @@ if __name__ == "__main__":
         prediction = test(leftname, rightname, savename)
         mask = np.logical_and(disp >= 0.001, disp <= opt.max_disp)
 
-        print("predict[mask], disp[mask")
-        print(prediction[mask], disp[mask])
         error = np.mean(np.abs(prediction[mask] - disp[mask]))
-        print("error.shape:", error.shape)
         rate = np.sum(np.abs(prediction[mask] - disp[mask]) > opt.threshold) / np.sum(mask)        
         avg_error += error
         avg_rate += rate
@@ -214,12 +210,8 @@ if __name__ == "__main__":
         depth_pred = 721.5377 * 0.54 / (prediction + 1. - mask_d)
         mask_d = disp > 0
         depth_gt = 721.5377 * 0.54 / (disp + 1. - mask_d)
-        
-        print("depth_pred[mask], depth_gt[mask")
-        print(depth_pred[mask], depth_gt[mask])
         depth_error = np.mean(np.abs(depth_pred[mask] - depth_gt[mask]))
         avg_depth_error += depth_error
-        print("mean depth error:", error)
 
     avg_error = avg_error / len(filelist)
     avg_rate = avg_rate / len(filelist)
