@@ -1,25 +1,25 @@
-# CUDA_VISIBLE_DEVICES=0 python evaluation.py --crop_height=384 \
-#                   --crop_width=1248 \
-#                   --max_disp=192 \
-#                   --data_path='/content/2011_09_26/2011_09_26_drive_0015_sync/' \
-#                   --test_list='lists/kitti2015_test.list' \
-#                   --save_path='./result/' \
-#                   --resume='./checkpoint/kitti2015_final.pth' \
-#                   --threshold=3.0 \
-#                   --kitti2015=1
-# # 2>&1 |tee logs/log_evaluation.txt
-# exit
 CUDA_VISIBLE_DEVICES=0 python evaluation.py --crop_height=384 \
                   --crop_width=1248 \
                   --max_disp=192 \
                   --data_path='/content/2011_09_26/2011_09_26_drive_0015_sync/' \
                   --test_list='lists/kitti2015_test.list' \
                   --save_path='./result/' \
-                  --resume='./checkpoint/kitti2012_final.pth' \
+                  --resume='./checkpoint/kitti2015_final.pth' \
                   --threshold=3.0 \
-                  --kitti=1
+                  --kitti2015=1
 # 2>&1 |tee logs/log_evaluation.txt
 exit
+# CUDA_VISIBLE_DEVICES=0 python evaluation.py --crop_height=384 \
+#                   --crop_width=1248 \
+#                   --max_disp=192 \
+#                   --data_path='/content/2011_09_26/2011_09_26_drive_0015_sync/' \
+#                   --test_list='lists/kitti2015_test.list' \
+#                   --save_path='./result/' \
+#                   --resume='./checkpoint/kitti2012_final.pth' \
+#                   --threshold=3.0 \
+#                   --kitti=1
+# # 2>&1 |tee logs/log_evaluation.txt
+# exit
 # CUDA_VISIBLE_DEVICES=0 python evaluation.py --crop_height=384 \
 #                   --crop_width=1248 \
 #                   --max_disp=192 \
