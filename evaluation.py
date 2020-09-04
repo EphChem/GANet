@@ -207,6 +207,18 @@ if __name__ == "__main__":
         avg_error += error
         avg_rate += rate
         print("===> Frame {}: ".format(index) + current_file[0:len(current_file)-1] + " ==> EPE Error: {:.4f}, Error Rate: {:.4f}".format(error, rate))
+        
+        ## Depth calculation
+        mask_d = prediction > 0
+        depth_pred = calib.f_u * baseline / (prediction + 1. - mask_d)
+        mask_d = disp > 0
+        depth_gt = calib.f_u * baseline / (disp + 1. - mask_d)
+        
+        print("depth_pred[mask], depth_gt[mask")
+        print(depth_pred[mask], depth_gt[mask])
+        error = np.mean(np.abs(depth_pred[mask] - depth_gt[mask]))
+        print("mean depth error:", error)
+
     avg_error = avg_error / len(filelist)
     avg_rate = avg_rate / len(filelist)
     print("===> Total {} Frames ==> AVG EPE Error: {:.4f}, AVG Error Rate: {:.4f}".format(len(filelist), avg_error, avg_rate))
