@@ -171,6 +171,7 @@ if __name__ == "__main__":
     filelist = f.readlines()
     avg_error = 0
     avg_rate = 0
+    avg_depth_error = 0
     for index in range(len(filelist)):
         current_file = filelist[index]
         if opt.kitti2015:
@@ -216,10 +217,13 @@ if __name__ == "__main__":
         
         print("depth_pred[mask], depth_gt[mask")
         print(depth_pred[mask], depth_gt[mask])
-        error = np.mean(np.abs(depth_pred[mask] - depth_gt[mask]))
+        depth_error = np.mean(np.abs(depth_pred[mask] - depth_gt[mask]))
+        avg_depth_error += depth_error
         print("mean depth error:", error)
 
     avg_error = avg_error / len(filelist)
     avg_rate = avg_rate / len(filelist)
-    print("===> Total {} Frames ==> AVG EPE Error: {:.4f}, AVG Error Rate: {:.4f}".format(len(filelist), avg_error, avg_rate))
+    avg_depth_error = avg_depth_error / len(filelist)
+#     print("===> Total {} Frames ==> AVG EPE Error: {:.4f}, AVG Error Rate: {:.4f}".format(len(filelist), avg_error, avg_rate))
+    print("===> Total {} Frames ==> AVG EPE Error: {:.4f}, AVG Error Rate: {:.4f}, AVG Depth Error: {:.4f}".format(len(filelist), avg_error, avg_rate, avg_depth_error))
 
