@@ -57,7 +57,7 @@ if __name__ == '__main__':
         print(disp.shape, depth[288,100])
         my_dpi = 120
         plt.figure(figsize = (depth.shape[1]/my_dpi, depth.shape[0]/my_dpi), dpi=my_dpi)
-        cv2_imshow(image)
+        cv2.imshow(image)
         sns.heatmap(depth)
         # np.save(disparity_dir + '/' + predix, disp)
         print(disp, disp * 256)
