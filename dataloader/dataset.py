@@ -189,11 +189,11 @@ def load_kitti_data(file_path, current_file):
     return temp_data
 def load_kitti2015_data(file_path, current_file):
     """ load current file from the list"""
-    filename = file_path + 'image_2/' + current_file[0: len(current_file) - 1]
+    filename = file_path + 'image_02/data/' + current_file[0: len(current_file) - 1]
     left = Image.open(filename)
-    filename = file_path + 'image_3/' + current_file[0: len(current_file) - 1]
+    filename = file_path + 'image_03/data/' + current_file[0: len(current_file) - 1]
     right = Image.open(filename)
-    filename = file_path + 'disp_occ_0/' + current_file[0: len(current_file) - 1]
+    filename = file_path + 'disparity_gt/' + current_file[0: len(current_file) - 1]
 
     disp_left = Image.open(filename)
     temp = np.asarray(disp_left)
