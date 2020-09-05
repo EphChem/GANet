@@ -25,7 +25,7 @@
 #                 --resume='./checkpoint/sceneflow_epoch_10.pth' \
 #                 --nEpochs=800 2>&1 |tee logs/log_finetune_kitti2015.txt
 
-CUDA_VISIBLE_DEVICES=0 python train.py --batchSize=8 \
+CUDA_VISIBLE_DEVICES=0 python train.py --batchSize=4 \
                 --crop_height=240 \
                 --crop_width=1248 \
                 --max_disp=192 \
