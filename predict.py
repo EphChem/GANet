@@ -157,5 +157,5 @@ if __name__ == "__main__":
         tic = time.time()
         test(leftname, rightname, savename)
         toc = time.time()
-        print("Finished prediction on ", current_file[0: len(current_file) - 1],".  Compute time: ", (toc-tic), "seconds.)
+        print("Finished prediction on ", current_file[0: len(current_file) - 1],".  Compute time: ", (toc-tic), "seconds.")
 
