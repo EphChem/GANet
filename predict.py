@@ -19,6 +19,7 @@ from torch.utils.data import DataLoader
 #from models.GANet_deep import GANet
 from dataloader.data import get_test_set
 import numpy as np
+import time
 
 # Training settings
 parser = argparse.ArgumentParser(description='PyTorch GANet Example')
@@ -153,6 +154,8 @@ if __name__ == "__main__":
             rightname = file_path + 'colored_1/' + current_file[0: len(current_file) - 1]
 
         savename = opt.save_path + current_file[0: len(current_file) - 1]
+        tic = time.time()
         test(leftname, rightname, savename)
-        print("Finished prediction on ", current_file[0: len(current_file) - 1])
+        toc = time.time()
+        print("Finished prediction on ", current_file[0: len(current_file) - 1],".  Compute time: ", (toc-tic), "seconds.)
 
