@@ -207,7 +207,7 @@ if __name__ == "__main__":
         
         ## Depth error calculation
         mask_d = prediction > 0
-        print(mask_d, (721.5377 * 0.54 / (prediction))[mask], (disp + 1. - mask_d)[mask])
+        print(mask_d, 1. - mask_d, (721.5377 * 0.54 / (prediction))[mask], (disp + 1. - mask_d)[mask])
         depth_pred = 721.5377 * 0.54 / (prediction + 1. - mask_d)
         mask_d = disp > 0
         depth_gt = 721.5377 * 0.54 / (disp + 1. - mask_d)
