@@ -195,7 +195,8 @@ if __name__ == "__main__":
             dispname = opt.data_path + 'disparity/' + current_file[0: len(current_file) - 4] + 'pfm'
             savename = opt.save_path + str(index) + '.png'
             disp, height, width = readPFM(dispname)
-       
+        
+        # Disparity error calculation
         prediction = test(leftname, rightname, savename)
         mask = np.logical_and(disp >= 0.001, disp <= opt.max_disp)
 
@@ -203,19 +204,19 @@ if __name__ == "__main__":
         rate = np.sum(np.abs(prediction[mask] - disp[mask]) > opt.threshold) / np.sum(mask)        
         avg_error += error
         avg_rate += rate
-        print("===> Frame {}: ".format(index) + current_file[0:len(current_file)-1] + " ==> EPE Error: {:.4f}, Error Rate: {:.4f}".format(error, rate))
         
-        ## Depth calculation
+        ## Depth error calculation
         mask_d = prediction > 0
         depth_pred = 721.5377 * 0.54 / (prediction + 1. - mask_d)
         mask_d = disp > 0
         depth_gt = 721.5377 * 0.54 / (disp + 1. - mask_d)
         depth_error = np.mean(np.abs(depth_pred[mask] - depth_gt[mask]))
         avg_depth_error += depth_error
-
+        
+        print("===> Frame {}: ".format(index) + current_file[0:len(current_file)-1] + " ==> EPE Error: {:.4f}, Error Rate: {:.4f}, Depth Error (m): {:.4f}".format(error, rate, depth_error))
+        
     avg_error = avg_error / len(filelist)
     avg_rate = avg_rate / len(filelist)
     avg_depth_error = avg_depth_error / len(filelist)
-#     print("===> Total {} Frames ==> AVG EPE Error: {:.4f}, AVG Error Rate: {:.4f}".format(len(filelist), avg_error, avg_rate))
     print("===> Total {} Frames ==> AVG EPE Error: {:.4f}, AVG Error Rate: {:.4f}, AVG Depth Error: {:.4f}".format(len(filelist), avg_error, avg_rate, avg_depth_error))
 
