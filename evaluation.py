@@ -207,6 +207,7 @@ if __name__ == "__main__":
         
         ## Depth error calculation
         mask_d = prediction > 0
+        print(mask_d, (disp + 1. - mask_d))
         depth_pred = 721.5377 * 0.54 / (prediction + 1. - mask_d)
         mask_d = disp > 0
         depth_gt = 721.5377 * 0.54 / (disp + 1. - mask_d)
@@ -218,5 +219,5 @@ if __name__ == "__main__":
     avg_error = avg_error / len(filelist)
     avg_rate = avg_rate / len(filelist)
     avg_depth_error = avg_depth_error / len(filelist)
-    print("===> Total {} Frames ==> AVG EPE Error: {:.4f}, AVG Error Rate: {:.4f}, AVG Depth Error: {:.4f}".format(len(filelist), avg_error, avg_rate, avg_depth_error))
+    print("===> Total {} Frames ==> AVG EPE Error: {:.4f}, AVG Error Rate: {:.4f}, AVG Depth Error (m): {:.4f}".format(len(filelist), avg_error, avg_rate, avg_depth_error))
 
