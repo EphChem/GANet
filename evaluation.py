@@ -18,6 +18,7 @@ import torch.optim as optim
 from torch.autograd import Variable
 from torch.utils.data import DataLoader
 from models.GANet_deep import GANet
+from utils import kitti_util
 
 #from dataloader.data import get_test_set
 import numpy as np
@@ -172,6 +173,9 @@ if __name__ == "__main__":
     avg_error = 0
     avg_rate = 0
     avg_depth_error = 0
+    baseline = 0.54
+    calib = kitti_util.Calibration(calib_file)  #Fetching camera calibration params.
+
     for index in range(len(filelist)):
         current_file = filelist[index]
         if opt.kitti2015:
@@ -207,9 +211,9 @@ if __name__ == "__main__":
         
         ## Depth error calculation
         mask_d = prediction > 0
-        depth_pred = 721.5377 * 0.54 / (prediction + 1. - mask_d)
+        depth_pred = calib.f_u * baseline / (prediction + 1. - mask_d)
         mask_d = disp > 0
-        depth_gt = 721.5377 * 0.54 / (disp + 1. - mask_d)
+        depth_gt = calib.f_u * baseline / (disp + 1. - mask_d)
         depth_error = np.mean(np.abs(depth_pred[mask] - depth_gt[mask]))
         avg_depth_error += depth_error
         
