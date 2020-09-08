@@ -174,6 +174,7 @@ if __name__ == "__main__":
     avg_rate = 0
     avg_depth_error = 0
     baseline = 0.54
+    calib_file = "/content/2011_09_26/2011_09_26_drive_0015_calib.txt"
     calib = kitti_util.Calibration(calib_file)  #Fetching camera calibration params.
 
     for index in range(len(filelist)):
